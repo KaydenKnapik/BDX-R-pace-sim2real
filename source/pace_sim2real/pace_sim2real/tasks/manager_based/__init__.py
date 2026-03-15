@@ -12,3 +12,12 @@ gym.register(
         "env_cfg_entry_point": f"{__name__}.pace.anymal_pace_env_cfg:AnymalDPaceEnvCfg"
     },
 )
+
+gym.register(
+    id="Isaac-Pace-BDX-R-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.pace.bdxr_pace_env_cfg:BDXRPaceEnvCfg"
+    },
+)
