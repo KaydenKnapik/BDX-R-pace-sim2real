@@ -44,7 +44,7 @@ class BDXRPaceCfg(PaceCfg):
     """Pace configuration for BDX-R robot."""   
     robot_name: str = "bdxr_sim"
     data_dir: str = "bdxr_sim/chirp_data.pt"  # located in pace_sim2real/data/bdxr_sim/chirp_data.pt
-    bounds_params: torch.Tensor = torch.zeros((42, 2))  # 10 + 10 + 10 + 10 + 2 = 42 parameters to optimize
+    bounds_params: torch.Tensor = torch.zeros((41, 2))  # 10 + 10 + 10 + 10 + 1 = 41 parameters to optimize
     joint_order: list[str] =[
         "Left_Hip_Yaw",
         "Left_Hip_Roll",
@@ -64,9 +64,9 @@ class BDXRPaceCfg(PaceCfg):
         self.bounds_params[:10, 1] = 1.0  # armature between 1e-5 - 1.0 [kgm2]
         self.bounds_params[10:20, 1] = 7.0  # dof_damping between 0.0 - 7.0 [Nm s/rad]
         self.bounds_params[20:30, 1] = 0.5  # friction between 0.0 - 0.5
-        self.bounds_params[30:40, 0] = -0.1
-        self.bounds_params[30:40, 1] = 0.1  # bias between -0.1 - 0.1 [rad]
-        self.bounds_params[40:42, 1] = 10.0  # delay between 0.0 - 10.0 [sim steps]
+        self.bounds_params[30:40, 0] = -0.005
+        self.bounds_params[30:40, 1] = 0.005  # bias between -0.005 - 0.005 [rad] (accurate encoders)
+        self.bounds_params[40, 1] = 10.0  # delay between 0.0 - 10.0 [sim steps]
 
 
 @configclass
